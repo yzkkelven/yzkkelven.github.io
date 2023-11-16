@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Cartas com Dado - Acidófilos</title>
+    <style>
+        /* Adicione estilos conforme necessário */
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-image: url('black.jpeg'); /* Substitua 'background.jpg' pelo caminho da sua imagem de fundo */
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Cor do texto, ajuste conforme necessário */
+        }
+        #title {
+            font-size: 50px; /* Aumenta o tamanho da fonte */
+            font-family: 'NomeDaSuaFonte', sans-serif; /* Substitua 'NomeDaSuaFonte' pela fonte desejada */
+            margin-top: 20px;
+        }
+        
+        #card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .card {
+            width: 80px;
+            height: 120px;
+            border: 1px solid #000;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 5px;
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+        }
+        .card:hover {
+            transform: scale(1.2);
+        }
+        #dice {
+            margin-top: 20px;
+            position: relative;
+        }
+        #dice-image {
+            width: 50px; /* Largura da imagem do dado */
+            height: 50px; /* Altura da imagem do dado */
+            position: absolute;
+            top: -60px; /* Ajuste conforme necessário para posicionar acima do texto */
+        }
+        #roll-button {
+            margin-top: 10px;
+        }
+        #reset-button {
+            margin-top: 10px;
+            background-color: rgb(36, 165, 36);
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #big-card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            background-color: #fff
+            padding: 20px;
+            border: 1px solid #000;
+        }
+
+        #big-card-content {
+    font-size: 70px;
+    height: 100%; /* Ocupar toda a altura disponível */
+        }
+        #close-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="title">Acidófilos</div>
+
+    <div id="card-container">
+        <!-- Cartas com imagens -->
+        <div class="card" id="card1" onclick="drawCard(1)"><img src="carta1.png" alt="Card 1"></div>
+        <div class="card" id="card2" onclick="drawCard(2)"><img src="proteçao.png" alt="Card 2"></div>
+        <div class="card" id="card3" onclick="drawCard(3)"><img src="proteçao.png" alt="Card 3"></div>
+        <div class="card" id="card4" onclick="drawCard(4)"><img src="proteçao.png" alt="Card 4"></div>
+        <div class="card" id="card5" onclick="drawCard(5)"><img src="proteçao.png" alt="Card 5"></div>
+        <div class="card" id="card6" onclick="drawCard(6)"><img src="proteçao.png" alt="Card 6"></div>
+        <div class="card" id="card7" onclick="drawCard(7)"><img src="c7.jpg" alt="Card 7"></div>
+        <div class="card" id="card8" onclick="drawCard(8)"><img src="c8.jpg" alt="Card 8"></div>
+        <div class="card" id="card9" onclick="drawCard(9)"><img src="c9.jpg" alt="Card 9"></div>
+        <div class="card" id="card10" onclick="drawCard(10)"><img src="c10.jpg" alt="Card 10"></div>
+        <div class="card" id="card11" onclick="drawCard(11)"><img src="c11.jpg" alt="Card 11"></div>
+         <div class="card" id="card12" onclick="drawCard(12)"><img src="c12.jpg" alt="Card 12"></div>
+         <div class="card" id="card13" onclick="drawCard(13)"><img src="c13.jpg" alt="Card 13"></div>
+            <div class="card" id="card14" onclick="drawCard(14)"><img src="c14.jpg" alt="Card 14"></div>
+            <div class="card" id="card15" onclick="drawCard(15)"><img src="c15.jpg" alt="Card 15"></div>
+            <div class="card" id="card16" onclick="drawCard(16)"><img src="c16.jpg" alt="Card 16"></div>
+            <div class="card" id="card17" onclick="drawCard(17)"><img src="c17.jpg" alt="Card 17"></div>
+            <div class="card" id="card18" onclick="drawCard(18)"><img src="c18.jpg" alt="Card 18"></div>
+            <div class="card" id="card19" onclick="drawCard(19)"><img src="c19.jpg" alt="Card 19"></div>
+            <div class="card" id="card20" onclick="drawCard(20)"><img src="c20.jpg" alt="Card 20"></div>
+            <div class="card" id="card21" onclick="drawCard(21)"><img src="c21.jpg" alt="Card 21"></div>
+            <div class="card" id="card22" onclick="drawCard(22)"><img src="c22.jpg" alt="Card 22"></div>
+            <div class="card" id="card23" onclick="drawCard(23)"><img src="c23.jpg" alt="Card 23"></div>
+            <div class="card" id="card24" onclick="drawCard(24)"><img src="c24.jpg" alt="Card 24"></div>
+            <div class="card" id="card25" onclick="drawCard(25)"><img src="c25.jpg" alt="Card 25"></div>
+            <div class="card" id="card26" onclick="drawCard(26)"><img src="c26.jpg" alt="Card 26"></div>
+            <div class="card" id="card27" onclick="drawCard(27)"><img src="c27.jpg" alt="Card 27"></div>
+            <div class="card" id="card28" onclick="drawCard(28)"><img src="c28.jpg" alt="Card 28"></div>
+            <div class="card" id="card29" onclick="drawCard(29)"><img src="c29.jpg" alt="Card 29"></div>
+            <div class="card" id="card30" onclick="drawCard(30)"><img src="c30.jpg" alt="Card 30"></div>
+            <div class="card" id="card31" onclick="drawCard(31)"><img src="c31.jpg" alt="Card 31"></div>
+            <div class="card" id="card32" onclick="drawCard(32)"><img src="c32.jpg" alt="Card 32"></div>
+            <div class="card" id="card33" onclick="drawCard(33)"><img src="c33.jpg" alt="Card 33"></div>
+            <div class="card" id="card34" onclick="drawCard(34)"><img src="c34.jpg" alt="Card 34"></div>
+            <div class="card" id="card35" onclick="drawCard(35)"><img src="c35.jpg" alt="Card 35"></div>
+            <div class="card" id="card36" onclick="drawCard(36)"><img src="c36.jpg" alt="Card 36"></div>
+            <div class="card" id="card37" onclick="drawCard(37)"><img src="c37.jpg" alt="Card 37"></div>
+            <div class="card" id="card38" onclick="drawCard(38)"><img src="c38.jpg" alt="Card 38"></div>
+            <div class="card" id="card39" onclick="drawCard(39)"><img src="c39.jpg" alt="Card 39"></div>
+            <div class="card" id="card40" onclick="drawCard(40)"><img src="c40.jpg" alt="Card 40"></div>
+            <div class="card" id="card41" onclick="drawCard(41)"><img src="c41.jpg" alt="Card 41"></div>
+            <div class="card" id="card42" onclick="drawCard(42)"><img src="c42.jpg" alt="Card 42"></div>
+            <div class="card" id="card43" onclick="drawCard(43)"><img src="c43.jpg" alt="Card 43"></div>
+            <div class="card" id="card44" onclick="drawCard(44)"><img src="c44.jpg" alt="Card 44"></div>
+            <div class="card" id="card45" onclick="drawCard(45)"><img src="c45.jpg" alt="Card 45"></div>
+            <div class="card" id="card46" onclick="drawCard(46)"><img src="c46.jpg" alt="Card 46"></div>
+            <div class="card" id="card47" onclick="drawCard(47)"><img src="c47.jpg" alt="Card 47"></div>
+            <div class="card" id="card48" onclick="drawCard(48)"><img src="c48.jpg" alt="Card 48"></div>
+            <div class="card" id="card49" onclick="drawCard(49)"><img src="c49.jpg" alt="Card 49"></div>
+            <div class="card" id="card50" onclick="drawCard(50)"><img src="c50.jpg" alt="Card 50"></div>
+            <div class="card" id="card51" onclick="drawCard(51)"><img src="c51.jpg" alt="Card 51"></div>
+            <div class="card" id="card52" onclick="drawCard(52)"><img src="c52.jpg" alt="Card 52"></div>
+            <div class="card" id="card53" onclick="drawCard(53)"><img src="c53.jpg" alt="Card 53"></div>
+            <div class="card" id="card54" onclick="drawCard(54)"><img src="c54.jpg" alt="Card 54"></div>
+            <div class="card" id="card55" onclick="drawCard(55)"><img src="c55.jpg" alt="Card 55"></div>
+            <div class="card" id="card56" onclick="drawCard(56)"><img src="c56.jpg" alt="Card 56"></div>
+            <div class="card" id="card57" onclick="drawCard(57)"><img src="c57.jpg" alt="Card 57"></div>
+            <div class="card" id="card58" onclick="drawCard(58)"><img src="c58.jpg" alt="Card 58"></div>
+            <div class="card" id="card59" onclick="drawCard(59)"><img src="c59.jpg" alt="Card 59"></div>
+            <div class="card" id="card60" onclick="drawCard(60)"><img src="c60.jpg" alt="Card 60"></div>
+            <div class="card" id="card61" onclick="drawCard(61)"><img src="c61.jpg" alt="Card 61"></div>
+            <div class="card" id="card62" onclick="drawCard(62)"><img src="c62.jpg" alt="Card 62"></div>
+            <div class="card" id="card63" onclick="drawCard(63)"><img src="c63.jpg" alt="Card 63"></div>
+    <div class="card" id="card64" onclick="drawCard(64)"><img src="c64.jpg" alt="Card 64"></div>
+    <div class="card" id="card65" onclick="drawCard(65)"><img src="c65.jpg" alt="Card 65"></div>
+    <div class="card" id="card66" onclick="drawCard(66)"><img src="c66.jpg" alt="Card 66"></div>
+    <div class="card" id="card67" onclick="drawCard(67)"><img src="c67.jpg" alt="Card 67"></div>
+    <div class="card" id="card68" onclick="drawCard(68)"><img src="c68.jpg" alt="Card 68"></div>
+    <div class="card" id="card69" onclick="drawCard(69)"><img src="c69.jpg" alt="Card 69"></div>
+    <div class="card" id="card70" onclick="drawCard(70)"><img src="c70.jpg" alt="Card 70"></div>
+    <div class="card" id="card71" onclick="drawCard(71)"><img src="c71.jpg" alt="Card 71"></div>
+    <div class="card" id="card72" onclick="drawCard(72)"><img src="c72.jpg" alt="Card 72"></div>
+
+    </div>
+
+    <<!-- ... (código HTML anterior) ... -->
+
+<<div id="dice">
+    <!-- Dado -->
+    <button onclick="rollDice()">Rolar Novamente</button>
+    <button id="reset-button" onclick="resetGame()">Resetar Jogo</button>
+    <p id="dice-result">Resultado do Dado: </p>
+</div>
+
+<div id="big-card">
+    <span id="close-btn" onclick="closeBigCard()">Fechar</span>
+    <div id="big-card-content"></div>
+</div>
+
+<!-- ... (restante do código HTML) ... -->
+
+<script>
+    // Lógica JavaScript
+    var selectedCards = [];
+
+    function drawCard(cardNumber) {
+        if (!selectedCards.includes(cardNumber)) {
+            selectedCards.push(cardNumber);
+            var cardElement = document.getElementById('card' + cardNumber);
+            cardElement.style.pointerEvents = 'none'; // Desabilita o clique na carta
+            rollDice(); // Atualiza a carta exibida com o resultado do dado
+        }
+    }
+
+    function rollDice() {
+        // Simulação de rolar um dado de 72 lados
+        var diceResult;
+
+        // Continue rolando o dado até obter um número que ainda não foi selecionado
+        do {
+            diceResult = Math.floor(Math.random() * 72) + 1;
+        } while (selectedCards.includes(diceResult));
+
+        // Atualiza a carta exibida com o resultado do dado
+        var cardElement = document.getElementById('card' + diceResult);
+        document.getElementById('dice-result').innerText = 'Resultado do Dado: ' + diceResult;
+
+        // Esconde a carta
+        cardElement.style.display = 'none';
+
+        // Adiciona a carta sorteada à lista de cartas selecionadas
+        selectedCards.push(diceResult);
+
+        // Amplia a carta na tela
+        showBigCard(cardElement.innerHTML);
+    }
+
+    function showBigCard(cardContent) {
+    var bigCard = document.getElementById('big-card');
+    var bigCardContent = document.getElementById('big-card-content');
+
+    bigCardContent.innerHTML = cardContent;
+    bigCard.style.display = 'block';
+    }
+
+    function closeBigCard() {
+        var bigCard = document.getElementById('big-card');
+        bigCard.style.display = 'none';
+    }
+
+    function resetGame() {
+        // Exibe todas as cartas e permite o clique nelas novamente
+        for (var i = 1; i <= 72; i++) {
+            var cardElement = document.getElementById('card' + i);
+            cardElement.style.display = 'block';
+            cardElement.style.pointerEvents = 'auto';
+        }
+
+        // Limpa a lista de cartas selecionadas
+        selectedCards = [];
+
+        // Limpa o resultado do dado
+        document.getElementById('dice-result').innerText = 'Resultado do Dado: ';
+
+        // Fecha a carta ampliada se estiver aberta
+        closeBigCard();
+    }
+</script>
+
+<!-- ... (restante do código HTML) ... -->
+
+</script>
+
+</body>
+</htm
